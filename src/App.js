@@ -24,61 +24,13 @@ function App() {
     }
   };
 
-  // const handleSubscription = () => {
-  //   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  //   if (isValidEmail) {
-  //     const apiGatewayEndpoint =
-  //       "https://xeh2qrfq5a.execute-api.us-east-1.amazonaws.com/weatheralert/"; // Replace with your actual API Gateway endpoint
-  //     const dataToSend = { email, location };
-  //     window.alert(
-  //       "If you are not subscribe, confrim subscription to get location data"
-  //     );
-
-  //     axios
-  //       .post(apiGatewayEndpoint, dataToSend)
-  //       .then((response) => {
-  //         if (response.status === 200) {
-  //           // Call the second Lambda API here
-  //           const secondLambdaEndpoint =
-  //             "https://jkg0k8a4j6.execute-api.us-east-1.amazonaws.com/sendAlert/"; // Replace with the URL of the second Lambda API
-  //           axios
-  //             .post(secondLambdaEndpoint, dataToSend)
-  //             .then((response) => {
-  //               if (response.status === 200) {
-  //                 // Success
-  //               } else {
-  //                 // Handle API call to the second Lambda failed
-  //               }
-  //             })
-  //             .catch((error) => {
-  //               // Handle API call error to the second Lambda
-  //               console.error(error);
-  //             });
-
-  //           setIsSubscribed(true);
-  //           setErrorMessage("");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setIsSubscribed(false);
-  //         setErrorMessage("An error occurred. Please try again");
-  //         console.log(error);
-  //       });
-  //   } else {
-  //     // Handle invalid email address
-  //     setIsSubscribed(false);
-  //     setErrorMessage("Please enter a valid email address.");
-  //     window.location.reload();
-  //   }
-  // };
+  
 
   const handleSubscription = () => {
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     if (isValidEmail) {
-      const apiGatewayEndpoint =
-        "https://xeh2qrfq5a.execute-api.us-east-1.amazonaws.com/weatheralert/"; // Replace with your actual API Gateway endpoint
+      const apiGatewayEndpoint = process.env.REACT_APP_API_ENDPOINT_1; // Replace with your actual API Gateway endpoint
       const dataToSend = { email, location };
       window.alert(
         "If you are not subscribe, confrim subscription to get location data"
@@ -89,8 +41,7 @@ function App() {
         .then((response) => {
           if (response.status === 200) {
             // Call the second Lambda API here
-            const secondLambdaEndpoint =
-              "https://jkg0k8a4j6.execute-api.us-east-1.amazonaws.com/sendAlert/"; // Replace with the URL of the second Lambda API
+            const secondLambdaEndpoint = process.env.REACT_APP_API_ENDPOINT_2; // Replace with the URL of the second Lambda API
             axios
               .post(secondLambdaEndpoint, dataToSend)
               .then((response) => {
